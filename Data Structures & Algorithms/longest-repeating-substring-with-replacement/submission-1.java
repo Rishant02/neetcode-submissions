@@ -1,24 +1,21 @@
 class Solution {
-
     public int characterReplacement(String s, int k) {
-        // TC: O(n * 26), SC: O(1)
+        // TC: O(n), SC: O(1)
         // Frequency array to store count of A-Z
         int[] freq = new int[26];
-
         // Left pointer of sliding window
         int left = 0;
-
+        // Max frequency of current window, as we already decrementing while shrinking
+        int maxFreq = 0;
         // Stores maximum valid window length
         int ans = 0;
 
         // Expand window using right pointer
         for (int right = 0; right < s.length(); right++) {
-
             // Add current character into frequency array
             freq[s.charAt(right) - 'A']++;
-
             // Find maximum frequency character in current window
-            int maxFreq = Arrays.stream(freq).max().getAsInt();
+            maxFreq = Math.max(maxFreq, freq[s.charAt(right) - 'A']);
 
             /*
              * If:
@@ -28,10 +25,8 @@ class Solution {
              * so shrink the window from left side
              */
             while ((right - left + 1) - maxFreq > k) {
-
                 // Remove left character from frequency count
                 freq[s.charAt(left) - 'A']--;
-
                 // Move left pointer forward
                 left++;
             }
