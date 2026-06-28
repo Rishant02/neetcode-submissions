@@ -16,7 +16,7 @@
 
 class Solution {
     public TreeNode invertTree(TreeNode root) {
-        // TC: O(n), SC: O(1)
+        // TC: O(n), SC: O(H)
         // Base case:
         // If tree/subtree is empty, nothing to invert.
         if (root == null) {
